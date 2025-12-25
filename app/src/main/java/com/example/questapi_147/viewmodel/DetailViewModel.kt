@@ -5,3 +5,7 @@ sealed interface StatusUiDetail {
     object Error : StatusUiDetail
     object Loading : StatusUiDetail
 }
+
+class DetailViewModel(
+    savedStateHandle: SavedStateHandle,
+    private val repositoryDataSiswa: RepositoryDataSiswa
