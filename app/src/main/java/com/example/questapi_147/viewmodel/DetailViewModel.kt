@@ -1,5 +1,19 @@
 package com.example.questapi_147.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.questapi_147.modeldata.DataSiswa
+import com.example.questapi_147.repositori.RepositoryDataSiswa
+import com.example.questapi_147.uicontroller.route.DestinasiDetail
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import retrofit2.Response
+import java.io.IOException
+
 sealed interface StatusUiDetail {
     data class Success(val satusiswa: DataSiswa) : StatusUiDetail
     object Error : StatusUiDetail
@@ -30,3 +44,13 @@ class DetailViewModel(
             }
         }
     }
+
+    suspend fun hapusSatuSiswa() {
+        val resp: Response<Void> = repositoryDataSiswa.hapusSatuSiswa(idSiswa)
+        if (resp.isSuccessful) {
+            println("Sukses Hapus Data: ${resp.message()}")
+        } else {
+            println("Gagal Hapus Data: ${resp.errorBody()}")
+        }
+    }
+}
