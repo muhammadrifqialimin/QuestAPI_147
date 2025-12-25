@@ -9,3 +9,6 @@ sealed interface StatusUiDetail {
 class DetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val repositoryDataSiswa: RepositoryDataSiswa
+) : ViewModel() {
+    private val idSiswa: Int = checkNotNull(savedStateHandle[DestinasiDetail.itemIdArg])
+    var statusUiDetail: StatusUiDetail by mutableStateOf(StatusUiDetail.Loading)
